@@ -1,0 +1,91 @@
+/* .pago-plan-container {
+    background-image: url('/fondo-login.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  
+  .pago-plan-content {
+    padding: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .payment-methods {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .payment-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
+  }
+  
+  .payment-icon {
+    margin-bottom: 10px;
+  }
+  
+  .payment-icon img {
+    width: 50px;
+    margin: 0 5px;
+  }
+  
+  .payment-label {
+    cursor: pointer;
+    display: block;
+  }
+  
+  .payment-form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .payment-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .payment-form input, .payment-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .expiration-security {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .expiration-security label {
+    width: 48%;
+  }
+  
+  .btn-pagar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .btn-pagar:hover {
+    background-color: #0056b3;
+  } */
