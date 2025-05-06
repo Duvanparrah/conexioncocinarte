@@ -30,13 +30,14 @@
 
 import React from 'react';
 import logo from '/logo.png';
+import  filtro from '/filtro.png';
 
 export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full bg-white z-50 flex flex-col md:flex-row md:items-center justify-between px-6 py-2 shadow-sm">
       {/* Left */}
       <div className="flex items-center gap-4">
-        <button className="text-2xl bg-transparent border-none cursor-pointer">☰</button>
+        <img src={filtro} alt="filtro" className="text-2xl bg-transparent border-none cursor-pointer h-8"/>
         <img src={logo} alt="Logo Cocinarte" className="h-16" />
       </div>
 
