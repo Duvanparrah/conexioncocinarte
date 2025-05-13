@@ -1,0 +1,11 @@
+📁 api/
+Propósito: Encapsular las llamadas a servicios externos o APIs.
+
+Recomendación: Utiliza bibliotecas como axios o fetch para manejar las solicitudes. Puedes organizar este directorio por recursos, por ejemplo:
+
+Copiar
+Editar
+api/
+  ├── recipes.js
+  ├── ingredients.js
+  └── auth.js

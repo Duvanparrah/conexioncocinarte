@@ -1,0 +1,4 @@
+📁 middlewares/
+Propósito: Aunque en frontend el concepto de middleware no es tan común, puedes utilizar este directorio para funciones que interceptan acciones, como validaciones o autenticación antes de realizar ciertas operaciones.
+
+Recomendación: Evalúa si este directorio es necesario o si estas funciones pueden integrarse en controllers o libs.

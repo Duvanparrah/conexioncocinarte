@@ -1,0 +1,4 @@
+📁 libs/
+Propósito: Almacenar funciones o utilidades compartidas en toda la aplicación.
+
+Recomendación: Incluye aquí funciones como formateadores de fechas, cálculos nutricionales, etc.

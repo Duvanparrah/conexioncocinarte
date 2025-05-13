@@ -1,0 +1,10 @@
+📁 context/
+Propósito: Manejar el estado global utilizando React Context.
+
+Recomendación: Define contextos específicos para diferentes partes de la aplicación, como autenticación o recetas:
+
+Copiar
+Editar
+context/
+  ├── AuthContext.js
+  └── RecipeContext.js

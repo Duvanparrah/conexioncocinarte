@@ -1,0 +1,14 @@
+📁 pages/
+Propósito: Contener las páginas principales de la aplicación.
+
+Recomendación: Organiza las páginas por rutas y utiliza un sistema de enrutamiento como React Router. Por ejemplo:
+
+markdown
+Copiar
+Editar
+pages/
+  ├── Home.jsx
+  ├── Login.jsx
+  └── Recipes/
+      ├── RecipeDetail.jsx
+      └── RecipeList.jsx

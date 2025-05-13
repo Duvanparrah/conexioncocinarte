@@ -1,0 +1,18 @@
+📁 components/
+Propósito: Almacenar componentes reutilizables de la interfaz.
+
+Recomendación: Organiza los componentes por funcionalidad o tipo. Por ejemplo:
+
+css
+Copiar
+Editar
+components/
+  ├── UI/
+  │   ├── Button.jsx
+  │   └── Modal.jsx
+  ├── Layout/
+  │   ├── Header.jsx
+  │   └── Footer.jsx
+  └── Recipe/
+      ├── RecipeCard.jsx
+      └── RecipeList.jsx

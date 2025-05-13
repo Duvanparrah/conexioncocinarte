@@ -1,0 +1,4 @@
+📁 routes/
+Propósito: Configurar las rutas de la aplicación.
+
+Recomendación: Si utilizas React Router, puedes definir tus rutas aquí y luego importarlas en tu componente principal de enrutamiento.

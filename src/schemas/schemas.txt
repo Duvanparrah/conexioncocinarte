@@ -1,0 +1,11 @@
+📁 schemas/
+Propósito: Definir esquemas de validación utilizando Zod.
+
+Recomendación: Crea esquemas separados para diferentes formularios o entidades:
+
+pgsql
+Copiar
+Editar
+schemas/
+  ├── loginSchema.js
+  └── recipeSchema.js

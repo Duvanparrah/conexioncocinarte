@@ -1,0 +1,4 @@
+📁 controllers/
+Propósito: Contener la lógica de negocio que interactúa con las APIs y actualiza el estado.
+
+Recomendación: Asegúrate de que estos controladores sean funciones puras que puedan ser fácilmente testeadas.
