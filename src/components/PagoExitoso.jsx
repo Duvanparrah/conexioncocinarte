@@ -14,7 +14,7 @@ export default function PagoExitoso({ metodo }) {
   return (
     <div className="bg-white/90 mt-10 p-8 rounded-lg shadow-lg text-center max-w-xl mx-auto">
       <h2 className="text-2xl font-bold text-green-600">¡Pago exitoso!</h2>
-      <p className="mt-4 text-gray-700">Tu suscripción al Plan Nutricional Personalizado ha sido activada.</p>
+      <p className="mt-4 text-gray-700">Tu suscripción al Plan Nutricional ha sido activada.</p>
       <div className="mt-6 border-t pt-4 text-sm text-gray-600">
         <p>Referencia: <strong>#CocinArte-{Math.floor(100000 + Math.random() * 900000)}</strong></p>
         <p>Método: <strong>{metodo === 'tarjeta' ? 'Tarjeta' : 'Nequi'}</strong></p>

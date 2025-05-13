@@ -1,36 +1,7 @@
-// // src/components/Navbar.js
-// import React from 'react';
-// import '../css/Navbar.css';
-// import logo from '/logo.png';
-
-// export default function Navbar() {
-//   return (
-//     <header className="navbar">
-//       <div className="navbar-left">
-//         <button className="menu-button">☰</button>
-//         <img src={logo} alt="Logo Cocinarte" className="logo" />
-//       </div>
-      
-//       <nav className="navbar-center">
-//         <a href="#">Inicio</a>
-//         <a href="#">Banquetes</a>
-//         <a href="#" className="active">Plan Nutricional</a>
-//         <a href="#">Comunidad</a>
-//         <div className="dropdown">
-//           <a href="#">Categorías</a>
-//         </div>
-//       </nav>
-
-//       <div className="navbar-right">
-//         <input type="text" placeholder="Buscar..." className="search-bar" />
-//       </div>
-//     </header>
-//   );
-// }
-
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import logo from '/logo.png';
-import  filtro from '/filtro.png';
+import filtro from '/filtro.png';
 
 export default function Navbar() {
   return (
@@ -43,12 +14,12 @@ export default function Navbar() {
 
       {/* permanezaca centrado */}
       <nav className="flex flex-wrap gap-6 mt-2 md:mt-0 items-center">
-        <a href="#" className="text-black font-medium">Inicio</a>
-        <a href="#" className="text-black font-medium">Banquetes</a>
-        <a href="#" className="text-black font-medium">Plan Nutricional</a>
-        <a href="#" className="text-black font-medium">Comunidad</a>
+        <Link to="/home" className="text-black font-medium">Inicio</Link> {/* página de inicio */}
+        <Link to="/banquetes" className="text-black font-medium">Banquetes</Link>
+        <Link to="/" className="text-black font-medium">Plan Nutricional</Link>
+        <Link to="/comunidad" className="text-black font-medium">Comunidad</Link>
         <div className="relative">
-          <a href="#" className="text-black font-medium">Categorías</a>
+          <Link to="/categorias" className="text-black font-medium">Categorías</Link>
         </div>
       </nav>
 
