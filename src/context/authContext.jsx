@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { createContext, useContext, useState } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import { loginRequest, registerRequest, verifyTokenRequest } from "../api/auth";
 import Cookies from "js-cookie";
 
@@ -7,7 +6,7 @@ const AuthContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within a AuthProvider");
+  if (!context) throw new Error("useAuth debe ser usado dentro de AuthProvider");
   return context;
 };
 
@@ -17,37 +16,43 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // clear errors after 5 seconds
+  // Limpiar errores después de 5 segundos
   useEffect(() => {
     if (errors.length > 0) {
-      const timer = setTimeout(() => {
-        setErrors([]);
-      }, 5000);
+      const timer = setTimeout(() => setErrors([]), 5000);
       return () => clearTimeout(timer);
     }
   }, [errors]);
 
-  const signup = async (user) => {
+  const signup = async (userData) => {
+    setLoading(true);
     try {
-      const res = await registerRequest(user);
+      const res = await registerRequest(userData);
       if (res.status === 200) {
         setUser(res.data);
         setIsAuthenticated(true);
+        setErrors([]); // Limpiar errores tras éxito
       }
     } catch (error) {
-      console.log(error.response.data);
-      setErrors(error.response.data.message);
+      console.error(error.response?.data || "Error al registrarse");
+      setErrors(error.response?.data?.message || ["Error en el registro"]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const signin = async (user) => {
+  const signin = async (userData) => {
+    setLoading(true);
     try {
-      const res = await loginRequest(user);
+      const res = await loginRequest(userData);
       setUser(res.data);
       setIsAuthenticated(true);
+      setErrors([]); // Limpiar errores tras éxito
     } catch (error) {
-      console.log(error);
+      console.error(error.response?.data || "Error al iniciar sesión");
       setErrors(error.response?.data?.message || ["Error al iniciar sesión"]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,22 +64,25 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkLogin = async () => {
-      const cookies = Cookies.get();
-      if (!cookies.token) {
+      const token = Cookies.get("token");
+      if (!token) {
         setIsAuthenticated(false);
         setLoading(false);
         return;
       }
 
       try {
-        const res = await verifyTokenRequest(cookies.token);
-        console.log(res);
-        if (!res.data) return setIsAuthenticated(false);
-        setIsAuthenticated(true);
-        setUser(res.data);
-        setLoading(false);
+        const res = await verifyTokenRequest(token);
+        if (res.data) {
+          setUser(res.data);
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
       } catch (error) {
+        console.error("Error al verificar el token:", error);
         setIsAuthenticated(false);
+      } finally {
         setLoading(false);
       }
     };
@@ -97,5 +105,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-export default AuthContext;
