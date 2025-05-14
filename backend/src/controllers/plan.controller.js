@@ -1,3 +1,6 @@
+//EVI
+
+
 const NutritionPlan = require("../models/plan.model.js");
 const Usuario = require("../models/user.model.js");
 
@@ -8,7 +11,6 @@ class PlanNutricionalController {
       const {
         nombre_plan,
         descripcion,
-        objetivo,
         calorias,
         proteinas,
         grasas,
@@ -19,9 +21,9 @@ class PlanNutricionalController {
       } = req.body;
 
       // Validación de campos obligatorios
-      if (!nombre_plan || !objetivo || !calorias || !id_usuario) {
-        return res.status(400).json({ message: "Faltan datos obligatorios para crear el plan" });
-      }
+      // if (!nombre_plan || !objetivo || !calorias || !id_usuario) {
+      //   return res.status(400).json({ message: "Faltan datos obligatorios para crear el plan" });
+      // }
 
       // Verificar si el usuario existe
       const usuario = await Usuario.findByPk(id_usuario);
@@ -33,7 +35,6 @@ class PlanNutricionalController {
       const nuevoPlan = await NutritionPlan.create({
         nombre_plan,
         descripcion: descripcion || "",
-        objetivo,
         calorias,
         proteinas: proteinas || 0,
         grasas: grasas || 0,

@@ -1,16 +1,17 @@
 const app = require("./app.js");
 const { PORT } = require("./config.js");
-const { connectDB } = require("./db.js");
+const { connectDB, sequelize } = require("./db.js"); // ← Asegúrate de importar la instancia `sequelize`
 
 async function main() {
   try {
-    await connectDB();
+    await connectDB();                // 🔌 Conecta a la BD
+    await sequelize.sync({ alter: true });  // ✅ Crea las tablas si no existen (¡esta es la línea clave!)
     app.listen(PORT, () => {
-      console.log(`Listening on port http://localhost:${PORT}`);
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV}`);
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error al iniciar el servidor:", error);
   }
 }
 

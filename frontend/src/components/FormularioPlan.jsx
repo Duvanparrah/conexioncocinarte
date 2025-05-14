@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import PlanFinal from "./PlanFinal";
 
 const pasos = [
@@ -42,7 +43,6 @@ const pasos = [
     ],
   },
 
-
   {
     titulo: "Selecciona los ingredientes que consumes",
     descripcion: "Esto nos permitirá recomendarte un plan basado en tus preferencias.",
@@ -60,7 +60,6 @@ const pasos = [
   },
 ];
 
-
 export default function FormularioPlan() {
   const [pasoActual, setPasoActual] = useState(0);
   const [formulario, setFormulario] = useState({
@@ -70,11 +69,12 @@ export default function FormularioPlan() {
     altura: "",
     peso: "",
     actividad: "",
-    entrenamiento:"",
+    entrenamiento: "",
     ingredientes: [],
   });
 
   const [mostrarPlanFinal, setMostrarPlanFinal] = useState(false);
+  const [datosPlan, setDatosPlan] = useState(null); // ✅ Nuevo estado para respuesta del backend
 
   const avanzarPaso = () => {
     if (pasoActual === 1) {
@@ -105,11 +105,21 @@ export default function FormularioPlan() {
     });
   };
 
+  const enviarFormulario = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/respuesta", formulario); // ✅ URL del backend
+      setDatosPlan(response.data);
+      setMostrarPlanFinal(true);
+    } catch (error) {
+      console.error("Error al enviar datos al backend:", error);
+      alert("Hubo un error al generar tu plan nutricional.");
+    }
+  };
+
   const paso = pasos[pasoActual];
   const progreso = ((pasoActual + 1) / (pasos.length + 1)) * 100;
 
-  if (mostrarPlanFinal) return <PlanFinal />;
-
+  if (mostrarPlanFinal) return <PlanFinal datos={datosPlan} />; // ✅ Mostrar plan final con datos
 
   return (
     <>
@@ -366,11 +376,11 @@ export default function FormularioPlan() {
               no es una dieta, es un estilo de vida.
             </p>
             <button
-  onClick={() => setMostrarPlanFinal(true)}
-  className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition"
->
-  Comenzar mi Plan Nutricional
-</button>
+        onClick={enviarFormulario} // ✅ Reemplazado con la función de conexión
+        className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition"
+      >
+        Comenzar mi Plan Nutricional
+      </button>
 
           </div>
         </div>

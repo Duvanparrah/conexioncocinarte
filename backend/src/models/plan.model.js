@@ -15,10 +15,7 @@ const PlanNutricional = sequelize.define('PlanNutricional', {
     type: DataTypes.TEXT,
     allowNull: true
   },
-  objetivo: {
-    type: DataTypes.ENUM('bajar de peso', 'mantener peso', 'ganar músculo'),
-    allowNull: false
-  },
+
   calorias: {
     type: DataTypes.INTEGER,
     allowNull: false

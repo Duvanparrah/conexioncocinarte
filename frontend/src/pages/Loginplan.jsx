@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +8,7 @@ import { useAuth } from '../context/authContext.jsx';
 
 export default function Loginplan() {
   const navigate = useNavigate();
-  const { signin, errors: authErrors } = useAuth();
+  const { signin, isAuthenticated, errors: authErrors } = useAuth();
 
   const {
     register,
@@ -24,12 +24,22 @@ export default function Loginplan() {
 
   const onSubmit = async (data) => {
     try {
-      await signin(data);
-      navigate('/plan'); // Redirigir tras el login exitoso
+      const payload = {
+        email: data.email,
+        contraseña: data.password,
+      };
+      await signin(payload);
+      // El navigate se ejecutará en el useEffect si el login fue exitoso
     } catch (error) {
-      console.error('Error en el inicio de sesión:', error);
+      console.error("Error en el inicio de sesión:", error);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/plan');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <>
@@ -41,13 +51,15 @@ export default function Loginplan() {
         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg mt-20 text-center transform -translate-x-82">
           <img src="/logo.png" alt="Logo CocinArte" className="w-36 mx-auto mb-5" />
           <h2 className="text-xl font-semibold text-gray-800 mb-6">Inicia sesión</h2>
-          {authErrors.length > 0 && (
+
+          {Array.isArray(authErrors) && authErrors.length > 0 && (
             <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
               {authErrors.map((error, index) => (
                 <p key={index}>{error}</p>
               ))}
             </div>
           )}
+
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4 text-left">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">

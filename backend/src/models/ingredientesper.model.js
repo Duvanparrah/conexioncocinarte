@@ -16,10 +16,10 @@ const IngredientesPersonalizadosPlan = sequelize.define("IngredientesPersonaliza
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,  // Clave primaria en combinación con id_plan
-    references: {
-      model: 'ingredientes', // nombre real de la tabla en la DB
-      key: 'id_ingrediente'
-    },
+    // references: {
+    //   model: 'ingredientes', // nombre real de la tabla en la DB
+    //   key: 'id_ingrediente'
+    // },
     onDelete: 'CASCADE'
   }
 }, {

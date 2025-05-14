@@ -1,8 +1,9 @@
-import axios from "./axios"; // Importa la instancia personalizada
+// src/api/auth.js
+import axios from "./axios"; // usa la instancia
 
 export const registerRequest = async (user) => {
   try {
-    const response = await axios.post(`/auth/register`, user);
+    const response = await axios.post("/auth/register", user);
     return response.data;
   } catch (error) {
     console.error("Error en el registro:", error.response?.data || error.message);
@@ -12,7 +13,7 @@ export const registerRequest = async (user) => {
 
 export const loginRequest = async (user) => {
   try {
-    const response = await axios.post(`/auth/login`, user);
+    const response = await axios.post("/auth/login", user);
     return response.data;
   } catch (error) {
     console.error("Error en el login:", error.response?.data || error.message);
@@ -22,7 +23,7 @@ export const loginRequest = async (user) => {
 
 export const verifyTokenRequest = async () => {
   try {
-    const response = await axios.get(`/auth/verify`);
+    const response = await axios.get("/auth/verify");
     return response.data;
   } catch (error) {
     console.error("Error al verificar token:", error.response?.data || error.message);

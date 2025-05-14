@@ -16,5 +16,5 @@ module.exports = {
   // Otros
   TOKEN_SECRET: process.env.TOKEN_SECRET || "secret",
   STRIPE_PRIVATE_KEY: process.env.STRIPE_PRIVATE_KEY,
-  // FRONTEND_URL: process.env.FRONTEND_URL || "http://localhost:5173"
+   FRONTEND_URL: process.env.FRONTEND_URL || "http://localhost:5173"
 };

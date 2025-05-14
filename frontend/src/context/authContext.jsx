@@ -33,28 +33,34 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         setErrors([]); // Limpiar errores tras éxito
       }
-    } catch (error) {
-      console.error(error.response?.data || "Error al registrarse");
-      setErrors(error.response?.data?.message || ["Error en el registro"]);
+    } catch (err) {
+      console.error(err.response?.data || "Error al registrarse");
+      setErrors(Array.isArray(err?.message) ? err.message : [err?.message || "Error en el registro"]);
+
     } finally {
       setLoading(false);
     }
   };
 
   const signin = async (userData) => {
-    setLoading(true);
-    try {
-      const res = await loginRequest(userData);
-      setUser(res.data);
-      setIsAuthenticated(true);
-      setErrors([]); // Limpiar errores tras éxito
-    } catch (error) {
-      console.error(error.response?.data || "Error al iniciar sesión");
-      setErrors(error.response?.data?.message || ["Error al iniciar sesión"]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  try {
+    const res = await loginRequest(userData);
+    setUser(res); // Asume que loginRequest ya hace .data
+    setIsAuthenticated(true);
+    setErrors([]); // Limpiar errores tras éxito
+  } catch (error) {
+    console.error(error.response?.data || "Error al iniciar sesión");
+
+    const errMsg = error.response?.data?.message || "Error al iniciar sesión";
+
+    // Asegura que siempre sea un array
+    setErrors(Array.isArray(errMsg) ? errMsg : [errMsg]);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const logout = () => {
     Cookies.remove("token");

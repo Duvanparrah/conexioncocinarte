@@ -1,3 +1,6 @@
+// ingredientesper
+
+
 const IngredientesPersonalizadosPlan = require('../models/ingredientesper.model');  // Asegúrate de importar el modelo correcto
 const { ZodError } = require('zod');  // Para validaciones si las estás usando
 

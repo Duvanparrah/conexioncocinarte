@@ -7,7 +7,7 @@ class AuthController {
   // 🔹 Registro de usuario
   static async register(req, res) {
     try {
-      const { nombre_usuario, email, contraseña, tipo_usuario } = req.body;
+      const {  email, contraseña, tipo_usuario } = req.body;
 
       const userExists = await Usuario.findOne({ where: { email } });
       if (userExists) {
@@ -17,7 +17,6 @@ class AuthController {
       const hashedPassword = await bcrypt.hash(contraseña, 12);
 
       const newUser = await Usuario.create({
-        nombre_usuario,
         email,
         contraseña: hashedPassword,
         tipo_usuario: tipo_usuario || "usuario",
@@ -37,7 +36,6 @@ class AuthController {
 
       return res.status(201).json({
         id: newUser.id_usuario,
-        nombre_usuario: newUser.nombre_usuario,
         email: newUser.email,
         tipo_usuario: newUser.tipo_usuario,
         token,

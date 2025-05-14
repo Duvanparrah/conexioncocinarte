@@ -20,16 +20,16 @@ const ingredienteComida = require("./routes/ingredientecomida.route.js");
 
 
 
-//const { FRONTEND_URL } = require("./config.js");
+const { FRONTEND_URL } = require("./config.js");
 
 const app = express();
 
-//app.use(
-  //cors({
-    //credentials: true,
-    //origin: FRONTEND_URL,
- // })
-//);
+app.use(
+  cors({
+    credentials: true,
+    origin: FRONTEND_URL,
+ })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());

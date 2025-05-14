@@ -7,6 +7,10 @@ const RespuestaUsuarioPlan = sequelize.define("respuestas_usuario_plan", {
     autoIncrement: true,
     primaryKey: true
   },
+    objetivo: {
+      type: DataTypes.ENUM('bajar de peso', 'mantener peso', 'ganar músculo'),
+      allowNull: false
+    },
   id_usuario: {
     type: DataTypes.INTEGER,
     allowNull: false,
