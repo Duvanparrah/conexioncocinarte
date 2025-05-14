@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from '../schemas/loginSchema';
+import { loginSchema } from '../schemas/loginSchema.js';
 import DashboardSuperior from '../components/Navbar.jsx';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/authContext.jsx';
 
 export default function Loginplan() {
   const navigate = useNavigate();
