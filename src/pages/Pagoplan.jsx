@@ -24,7 +24,7 @@ export default function PagoPlan() {
   }
 
   return (
-    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/fondo-login.jpg')" }}>
+    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/fondo2.jpg')" }}>
       <Navbar />
       <div className="p-6 text-center text-gray-800 max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold">Elige tu método de pago</h1>

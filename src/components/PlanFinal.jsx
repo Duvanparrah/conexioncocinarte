@@ -4,7 +4,7 @@ export default function Planfinal() {
   // Card Component
   const Card = ({ children, className = "" }) => {
     return (
-      <div className={`bg-white shadow-md rounded-2xl ${className}`}>
+      <div className={`bg-white shadow-md rounded-2xl mt-19 ${className}`}>
         {children}
       </div>
     );

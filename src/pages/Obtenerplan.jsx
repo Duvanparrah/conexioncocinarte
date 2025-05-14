@@ -10,7 +10,7 @@ export default function ObtenerPlan() {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-center flex flex-col items-center" style={{ backgroundImage: "url('/fondo-login.jpg')" }}>
+    <div className="min-h-screen bg-cover bg-center flex flex-col items-center" style={{ backgroundImage: "url('/fondo2.jpg')" }}>
       <Navbar />
       <div className="mt-24 px-5 w-full flex justify-center">
         <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 w-full max-w-4xl text-center text-black shadow-xl border border-white/30">

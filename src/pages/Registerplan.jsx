@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from '../schemas/registerSchema';
 import DashboardSuperior from '../components/Navbar.jsx';
+import { useAuth } from '../context/authContext';
 
 export default function Registerplan() {
+  const navigate = useNavigate();
+  const { signup, errors: authErrors } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -18,23 +22,33 @@ export default function Registerplan() {
     console.log('Desplegar menú lateral');
   };
 
-  const onSubmit = (data) => {
-    console.log('Datos del formulario:', data);
+  const onSubmit = async (data) => {
+    try {
+      await signup(data);
+      navigate('/plan'); // Redirigir tras el registro exitoso
+    } catch (error) {
+      console.error('Error en el registro:', error);
+    }
   };
 
   return (
     <>
       <DashboardSuperior onMenuClick={handleMenuClick} />
-
       <main
         className="flex items-center justify-center min-h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/fondo-login.jpg')" }}
       >
-        <div className="w-full max-w-md bg-white p-5 rounded-xl shadow-lg mt-25 text-center transform -translate-x-82">
+        <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg mt-20 text-center transform -translate-x-82">
           <div className="w-full p-8 text-center">
             <img src="/logo.png" alt="Logo CocinArte" className="w-36 mx-auto mb-3" />
             <h2 className="text-xl font-semibold text-gray-800 mb-5">Crea una cuenta</h2>
-
+            {authErrors.length > 0 && (
+              <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+                {authErrors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
+              </div>
+            )}
             <form onSubmit={handleSubmit(onSubmit)}>
               <button
                 className="flex items-center justify-center gap-3 w-full py-2 border border-gray-300 bg-white text-gray-700 rounded-md hover:bg-gray-100 mb-5"

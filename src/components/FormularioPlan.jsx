@@ -114,7 +114,7 @@ export default function FormularioPlan() {
   return (
     <>
       {pasoActual < pasos.length ? (
-        <div className="max-w-2xl mx-auto p-6 mt-8 bg-white/90 rounded-2xl shadow-2xl text-center">
+        <div className="max-w-2xl mx-auto p-6 mt-8 bg-white/90 rounded-2xl shadow-2xl text-center mt-25">
           <div className="w-full bg-gray-200 h-3 rounded-full mb-6 overflow-hidden">
             <div
               className="h-3 bg-green-600 rounded-full transition-all duration-300"
@@ -332,7 +332,7 @@ export default function FormularioPlan() {
       ) : (
         // SECCIÓN FINAL
         <div
-          className="min-h-screen bg-cover bg-center flex items-center justify-center p-4"
+          className="min-h-screen bg-cover bg-center flex items-center justify-center p-4 mt-20"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1606788075761-8f56b1473f7e')",

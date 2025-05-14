@@ -7,24 +7,25 @@ import Pagoplan from "../pages/Pagoplan";
 import Plannutricional from "../pages/Plannutricional";
 import Registerplan from "../pages/Registerplan";
 import Homepage from "../pages/homepage";
-import RecoverPassword from '../pages/recoverpassword';
+import RecoverPassword from "../pages/recoverpassword";
 
+// Importa el AuthProvider
+import { AuthProvider } from "../context/authContext";
 
 export default function AppRoutes() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Homepage />} />
-        <Route path="/" element={<Loginplan />} />
-
-
-
-        <Route path="recover" element={<RecoverPassword />} />
-        <Route path="/registro" element={<Registerplan />} />
-        <Route path="/plan" element={<Obtenerplan />} />
-        <Route path="/pago" element={<Pagoplan />} />
-        <Route path="/plannutricional" element={<Plannutricional />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/" element={<Loginplan />} />
+          <Route path="/recover" element={<RecoverPassword />} />
+          <Route path="/registro" element={<Registerplan />} />
+          <Route path="/plan" element={<Obtenerplan />} />
+          <Route path="/pago" element={<Pagoplan />} />
+          <Route path="/plannutricional" element={<Plannutricional />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }

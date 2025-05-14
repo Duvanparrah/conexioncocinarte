@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '../schemas/loginSchema';
 import DashboardSuperior from '../components/Navbar.jsx';
-import { loginWithGoogle } from '../libs/authgoogle.jsx';
+import { useAuth } from '../context/authContext';
 
 export default function Loginplan() {
   const navigate = useNavigate();
+  const { signin, errors: authErrors } = useAuth();
 
   const {
     register,
@@ -21,28 +22,18 @@ export default function Loginplan() {
     console.log('Desplegar menú lateral');
   };
 
-  const handleGoogleLogin = async () => {
+  const onSubmit = async (data) => {
     try {
-      const user = await loginWithGoogle();
-      console.log('Usuario autenticado:', user);
-      navigate('/obtenerplan'); // Redirección después del login con Google
+      await signin(data);
+      navigate('/plan'); // Redirigir tras el login exitoso
     } catch (error) {
-      console.error('Error en la autenticación:', error);
+      console.error('Error en el inicio de sesión:', error);
     }
-  };
-
-  const onSubmit = (data) => {
-    console.log('Datos del formulario:', data);
-
-    // Aquí puedes hacer la lógica de login real si tienes API
-    // Por ahora redirige directo como ejemplo
-    navigate('/plan');
   };
 
   return (
     <>
       <DashboardSuperior onMenuClick={handleMenuClick} />
-
       <main
         className="flex items-center justify-center min-h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/fondo-login.jpg')" }}
@@ -50,19 +41,13 @@ export default function Loginplan() {
         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg mt-20 text-center transform -translate-x-82">
           <img src="/logo.png" alt="Logo CocinArte" className="w-36 mx-auto mb-5" />
           <h2 className="text-xl font-semibold text-gray-800 mb-6">Inicia sesión</h2>
-
-          <button
-            className="flex items-center justify-center gap-3 w-full py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 mb-5"
-            onClick={handleGoogleLogin}
-          >
-            <img
-              src="https://developers.google.com/identity/images/g-logo.png"
-              alt="Google logo"
-              className="w-5 h-5"
-            />
-            Iniciar sesión con Google
-          </button>
-
+          {authErrors.length > 0 && (
+            <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+              {authErrors.map((error, index) => (
+                <p key={index}>{error}</p>
+              ))}
+            </div>
+          )}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4 text-left">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">

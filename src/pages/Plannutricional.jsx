@@ -137,13 +137,13 @@ export default function PlanNutricional() {
   return (
     <div
       className="min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/fondo-login.jpg')" }}
+      style={{ backgroundImage: "url('/fondo2.jpg')" }}
     >
       <Navbar />
 
-      <div className="flex items-center justify-center min-h-[calc(100vh-80px)] px-30">
+      <div className="flex items-center justify-center min-h-[calc(100vh-80px)] px-60">
         {!mostrarFormulario ? (
-          <div className="bg-white/70 rounded-2xl shadow-xl p-8 max-w-4xl w-full flex flex-col md:flex-row items-center gap-6">
+          <div className="bg-white/70 rounded-2xl shadow-xl mt-25 p-8 max-w-4xl w-full flex flex-col md:flex-row items-center gap-6">
             <div className="flex-1 text-center md:text-left">
               <h2 className="text-4xl md:text-5x2 font-semibold text-gray-800 mb-4">
                 ¡Descubre un plan de <br />
