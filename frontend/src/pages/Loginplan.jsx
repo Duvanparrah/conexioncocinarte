@@ -52,13 +52,31 @@ export default function Loginplan() {
           <img src="/logo.png" alt="Logo CocinArte" className="w-36 mx-auto mb-5" />
           <h2 className="text-xl font-semibold text-gray-800 mb-6">Inicia sesión</h2>
 
-          {Array.isArray(authErrors) && authErrors.length > 0 && (
-            <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
-              {authErrors.map((error, index) => (
-                <p key={index}>{error}</p>
-              ))}
-            </div>
-          )}
+{/* manejo de error, mejorar feedback de cliente usuario: */}
+            {Array.isArray(authErrors) && authErrors.length > 0 && (
+              <div className="mb-6">
+                {authErrors.map((error, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 bg-red-100 border border-red-300 text-red-700 text-sm rounded-lg px-4 py-2 shadow-sm animate-fade-in"
+                  >
+                    <svg
+                      className="w-4 h-4 text-red-600"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M12 19a7 7 0 110-14 7 7 0 010 14z" />
+                    </svg>
+                    <span>{error}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* final */}
+
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4 text-left">

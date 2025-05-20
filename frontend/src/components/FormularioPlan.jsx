@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import PlanFinal from "./PlanFinal";
 
+
 const pasos = [
   {
     titulo: "¿Cuál es tu objetivo?",
@@ -38,8 +39,8 @@ const pasos = [
     titulo: "¿Realizas entrenamiento de fuerza?",
     descripcion: "",
     opciones: [
-      { label: "Sí", value: "si", icon: "/fuerza-si.png" },
-      { label: "No", value: "no", icon: "/fuerza-no.png" },
+      { label: "Sí", value: "si", icon: "/fuerza_aprovado.png" },
+      { label: "No", value: "no", icon: "/fuerza_denegado.png" },
     ],
   },
 
@@ -74,7 +75,7 @@ export default function FormularioPlan() {
   });
 
   const [mostrarPlanFinal, setMostrarPlanFinal] = useState(false);
-  const [datosPlan, setDatosPlan] = useState(null); // ✅ Nuevo estado para respuesta del backend
+  const [datosPlan, setDatosPlan, mensaje, setMensaje] = useState(null); // ✅ Nuevo estado para respuesta del backend
 
   const avanzarPaso = () => {
     if (pasoActual === 1) {
@@ -105,16 +106,53 @@ export default function FormularioPlan() {
     });
   };
 
-  const enviarFormulario = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/respuesta", formulario); // ✅ URL del backend
-      setDatosPlan(response.data);
-      setMostrarPlanFinal(true);
-    } catch (error) {
-      console.error("Error al enviar datos al backend:", error);
-      alert("Hubo un error al generar tu plan nutricional.");
-    }
+  // añadi formulario toma correctamente los valores
+function mapNivelActividad(valor) {
+  const mapa = {
+    sedentario: "sedentario",
+    ligero: "ligera actividad",
+    moderado: "moderadamente activo",
+    activo: "muy activo",
+    muy_activo: "extremadamente activo",
   };
+  return mapa[valor] || "sedentario";
+}
+
+
+
+const enviarFormulario = async () => {
+  try {
+    if (!user?.id) {
+       setMensaje("Debes iniciar sesión para guardar tu plan.");
+      return;
+    }
+
+    const payload = {
+      id_usuario: user.id, // o user.id_usuario según cómo guardes el usuario
+      objetivo: formulario.objetivo === "perder"
+        ? "bajar de peso"
+        : formulario.objetivo === "ganar"
+        ? "ganar músculo"
+        : "mantener peso",
+      edad: parseInt(formulario.edad),
+      sexo: formulario.sexo === "masculino" ? "hombre" : "mujer",
+      altura_cm: parseFloat(formulario.altura),
+      peso_kg: parseFloat(formulario.peso),
+      nivel_actividad: mapNivelActividad(formulario.actividad),
+      entrenamiento_fuerza: formulario.entrenamiento === "si",
+    };
+
+    const response = await axios.post("http://localhost:4200/api/respuestas", payload);
+
+    setDatosPlan(response.data.data); // Guarda los datos que retorna el backend
+    setMostrarPlanFinal(true);
+    setMensaje(null); // limpiar mensaje
+  } catch (error) {
+    console.error("Error al enviar datos al backend:", error);
+    setMensaje("❌ Hubo un error al guardar tu plan nutricional.");
+  }
+};
+
 
   const paso = pasos[pasoActual];
   const progreso = ((pasoActual + 1) / (pasos.length + 1)) * 100;
@@ -375,6 +413,12 @@ export default function FormularioPlan() {
               🎉 ¡Tu salud es lo más importante! Alimentarte bien 🎉<br />
               no es una dieta, es un estilo de vida.
             </p>
+            {mensaje && (
+  <div className="mb-4 p-3 rounded text-white bg-red-500 text-sm shadow">
+    {mensaje}
+  </div>
+)}
+
             <button
         onClick={enviarFormulario} // ✅ Reemplazado con la función de conexión
         className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition"

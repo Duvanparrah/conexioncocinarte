@@ -57,17 +57,45 @@ const onSubmit = async (data) => {
             <img src="/logo.png" alt="Logo CocinArte" className="w-36 mx-auto mb-3" />
             <h2 className="text-xl font-semibold text-gray-800 mb-5">Crea una cuenta</h2>
             {Array.isArray(authErrors) && authErrors.length > 0 && (
-  <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
-    {authErrors.map((error, index) => (
-      <p key={index}>{error}</p>
-    ))}
+  <div className="flex items-start bg-red-50 border border-red-400 text-red-700 p-4 rounded-lg mb-4 shadow-md text-left">
+    <svg className="w-5 h-5 mr-3 mt-1 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+    </svg>
+    <div>
+      <strong className="font-bold">¡Error al iniciar sesión!</strong>
+      <ul className="mt-1 list-disc list-inside text-sm">
+        {authErrors.map((error, index) => (
+          <li key={index}>{error}</li>
+        ))}
+      </ul>
+    </div>
   </div>
 )}
-{!Array.isArray(authErrors) && authErrors && (
-  <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
-    <p>{authErrors}</p>
-  </div>
-)}
+
+{/* manejo de error, mejorar feedback de cliente usuario: */}
+            {Array.isArray(authErrors) && authErrors.length > 0 && (
+              <div className="mb-6">
+                {authErrors.map((error, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 bg-red-100 border border-red-300 text-red-700 text-sm rounded-lg px-4 py-2 shadow-sm animate-fade-in"
+                  >
+                    <svg
+                      className="w-4 h-4 text-red-600"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M12 19a7 7 0 110-14 7 7 0 010 14z" />
+                    </svg>
+                    <span>{error}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* final */}
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <button

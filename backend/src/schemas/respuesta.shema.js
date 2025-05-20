@@ -69,3 +69,4 @@ const respuestaUsuarioPlanSchema = z.object({
 });
 
 module.exports = { respuestaUsuarioPlanSchema };
+
